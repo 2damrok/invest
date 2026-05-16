@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>우주 테마 관심종목 — 경찬의 노트</title>
+<title>우주 관심종목 — 경찬의 노트</title>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -278,7 +278,7 @@
     </a>
     <nav>
       <div class="nav-section">
-        <a href="stock-home.html" class="nav-item"><span>🏠</span> 홈</a>
+        <a href="index.html" class="nav-item"><span>🏠</span> 홈</a>
         <div class="nav-item"><span>🔍</span> 검색</div>
       </div>
       <div class="sidebar-divider"></div>
@@ -293,7 +293,7 @@
       <div class="sidebar-divider"></div>
       <div class="nav-section">
         <div class="nav-label">관심종목</div>
-        <a href="stock-category.html" class="nav-item" style="text-decoration:none;"><span>🚀</span> 우주 <span class="nav-item-count">8</span></a>
+        <a href="stock-category.html" class="nav-item"><span>🚀</span> 우주 <span class="nav-item-count">8</span></a>
       </div>
       <div class="sidebar-divider"></div>
       <div class="nav-section">
@@ -311,7 +311,7 @@
       <div class="breadcrumb">
         <a href="stock-home.html" style="color:var(--ink3);">홈</a>
         <span class="sep">/</span>
-        <span class="current">🚀 우주 테마 관심종목</span>
+        <span class="current">🚀 우주 관심종목</span>
       </div>
     </div>
 
@@ -322,50 +322,50 @@
           <span class="hero-dot"></span>
           WATCHLIST · SPACE &amp; DEFENSE
         </div>
-        <div class="hero-title">🚀 <span>우주 테마</span> 관심종목</div>
+        <div class="hero-title">🚀 <span>우주</span> 관심종목</div>
         <div class="hero-desc">뉴 스페이스 시대의 수혜주 — 발사체 · 위성 · 궤도 인프라 · 방산 융합 섹터</div>
 
         <!-- 티커 스트립 -->
         <div class="ticker-strip" id="ticker-strip">
-          <div class="ticker-item active" onclick="loadChart('SATL','Satixfy Space Systems','NASDAQ')">
+          <div class="ticker-item active" data-sym="SATL" onclick="loadChart('SATL')">
             <div class="ticker-sym">SATL</div>
             <div class="ticker-name">Satixfy Space</div>
-            <div class="ticker-chg up" id="chg-SATL">+0.00%</div>
+            <div class="ticker-chg up" id="chg-SATL">위성 통신</div>
           </div>
-          <div class="ticker-item" onclick="loadChart('RKLB','Rocket Lab USA','NASDAQ')">
+          <div class="ticker-item" data-sym="RKLB" onclick="loadChart('RKLB')">
             <div class="ticker-sym">RKLB</div>
             <div class="ticker-name">Rocket Lab</div>
-            <div class="ticker-chg up" id="chg-RKLB">+0.00%</div>
+            <div class="ticker-chg up" id="chg-RKLB">발사체</div>
           </div>
-          <div class="ticker-item" onclick="loadChart('RDW','Redwire Corp','NYSE')">
+          <div class="ticker-item" data-sym="RDW" onclick="loadChart('RDW')">
             <div class="ticker-sym">RDW</div>
             <div class="ticker-name">Redwire Corp</div>
-            <div class="ticker-chg down" id="chg-RDW">+0.00%</div>
+            <div class="ticker-chg down" id="chg-RDW">궤도 인프라</div>
           </div>
-          <div class="ticker-item" onclick="loadChart('RCAT','Red Cat Holdings','NASDAQ')">
+          <div class="ticker-item" data-sym="RCAT" onclick="loadChart('RCAT')">
             <div class="ticker-sym">RCAT</div>
             <div class="ticker-name">Red Cat Holdings</div>
-            <div class="ticker-chg up" id="chg-RCAT">+0.00%</div>
+            <div class="ticker-chg up" id="chg-RCAT">드론·방산</div>
           </div>
-          <div class="ticker-item" onclick="loadChart('ASTS','AST SpaceMobile','NASDAQ')">
+          <div class="ticker-item" data-sym="ASTS" onclick="loadChart('ASTS')">
             <div class="ticker-sym">ASTS</div>
             <div class="ticker-name">AST SpaceMobile</div>
-            <div class="ticker-chg up" id="chg-ASTS">+0.00%</div>
+            <div class="ticker-chg up" id="chg-ASTS">위성 통신</div>
           </div>
-          <div class="ticker-item" onclick="loadChart('LUNR','Intuitive Machines','NASDAQ')">
+          <div class="ticker-item" data-sym="LUNR" onclick="loadChart('LUNR')">
             <div class="ticker-sym">LUNR</div>
             <div class="ticker-name">Intuitive Machines</div>
-            <div class="ticker-chg up" id="chg-LUNR">+0.00%</div>
+            <div class="ticker-chg up" id="chg-LUNR">달 탐사</div>
           </div>
-          <div class="ticker-item" onclick="loadChart('SPCE','Virgin Galactic','NYSE')">
+          <div class="ticker-item" data-sym="SPCE" onclick="loadChart('SPCE')">
             <div class="ticker-sym">SPCE</div>
             <div class="ticker-name">Virgin Galactic</div>
-            <div class="ticker-chg down" id="chg-SPCE">+0.00%</div>
+            <div class="ticker-chg down" id="chg-SPCE">우주 관광</div>
           </div>
-          <div class="ticker-item" onclick="loadChart('MNTS','Momentus Inc','NASDAQ')">
+          <div class="ticker-item" data-sym="MNTS" onclick="loadChart('MNTS')">
             <div class="ticker-sym">MNTS</div>
             <div class="ticker-name">Momentus Inc</div>
-            <div class="ticker-chg up" id="chg-MNTS">+0.00%</div>
+            <div class="ticker-chg up" id="chg-MNTS">우주 운송</div>
           </div>
         </div>
       </div>
@@ -388,29 +388,12 @@
       </div>
 
       <div class="tv-wrap" id="tv-main">
-        <!-- TradingView Advanced Chart Widget -->
-        <div class="tradingview-widget-container" style="height:100%;width:100%">
-          <div class="tradingview-widget-container__widget" style="height:calc(100%);width:100%"></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-          {
-            "autosize": true,
-            "symbol": "NASDAQ:SATL",
-            "interval": "W",
-            "timezone": "Asia/Seoul",
-            "theme": "light",
-            "style": "1",
-            "locale": "kr",
-            "backgroundColor": "#ffffff",
-            "gridColor": "rgba(184,208,234,0.4)",
-            "hide_top_toolbar": false,
-            "hide_legend": false,
-            "allow_symbol_change": false,
-            "save_image": true,
-            "calendar": false,
-            "support_host": "https://www.tradingview.com"
-          }
-          </script>
-        </div>
+        <iframe id="tv-iframe"
+          src="https://www.tradingview.com/widgetembed/?frameElementId=tv-iframe&symbol=NASDAQ%3ASATL&interval=W&hidesidetoolbar=0&symboledit=0&saveimage=1&toolbarbg=f1f3f6&theme=light&style=1&timezone=Asia%2FSeoul&withdateranges=1&locale=kr"
+          style="width:100%;height:100%;border:none;"
+          allowtransparency="true"
+          allowfullscreen>
+        </iframe>
       </div>
     </div>
 
@@ -431,7 +414,7 @@
 
       <div class="mini-grid">
         <!-- SATL -->
-        <div class="mini-card active-card" id="mini-SATL" onclick="loadChart('SATL','Satixfy Space Systems','NASDAQ')">
+        <div class="mini-card active-card" id="mini-SATL" onclick="loadChart('SATL')">
           <div class="mini-card-header">
             <span class="mini-sym">SATL</span>
             <span class="mini-chg up">+2.4%</span>
@@ -448,7 +431,7 @@
         </div>
 
         <!-- RKLB -->
-        <div class="mini-card" id="mini-RKLB" onclick="loadChart('RKLB','Rocket Lab USA','NASDAQ')">
+        <div class="mini-card" id="mini-RKLB" onclick="loadChart('RKLB')">
           <div class="mini-card-header">
             <span class="mini-sym">RKLB</span>
             <span class="mini-chg up">+1.8%</span>
@@ -465,7 +448,7 @@
         </div>
 
         <!-- RDW -->
-        <div class="mini-card" id="mini-RDW" onclick="loadChart('RDW','Redwire Corp','NYSE')">
+        <div class="mini-card" id="mini-RDW" onclick="loadChart('RDW')">
           <div class="mini-card-header">
             <span class="mini-sym">RDW</span>
             <span class="mini-chg down">-0.9%</span>
@@ -482,7 +465,7 @@
         </div>
 
         <!-- RCAT -->
-        <div class="mini-card" id="mini-RCAT" onclick="loadChart('RCAT','Red Cat Holdings','NASDAQ')">
+        <div class="mini-card" id="mini-RCAT" onclick="loadChart('RCAT')">
           <div class="mini-card-header">
             <span class="mini-sym">RCAT</span>
             <span class="mini-chg up">+3.1%</span>
@@ -499,7 +482,7 @@
         </div>
 
         <!-- ASTS -->
-        <div class="mini-card" id="mini-ASTS" onclick="loadChart('ASTS','AST SpaceMobile','NASDAQ')">
+        <div class="mini-card" id="mini-ASTS" onclick="loadChart('ASTS')">
           <div class="mini-card-header">
             <span class="mini-sym">ASTS</span>
             <span class="mini-chg up">+5.2%</span>
@@ -516,7 +499,7 @@
         </div>
 
         <!-- LUNR -->
-        <div class="mini-card" id="mini-LUNR" onclick="loadChart('LUNR','Intuitive Machines','NASDAQ')">
+        <div class="mini-card" id="mini-LUNR" onclick="loadChart('LUNR')">
           <div class="mini-card-header">
             <span class="mini-sym">LUNR</span>
             <span class="mini-chg up">+1.2%</span>
@@ -533,7 +516,7 @@
         </div>
 
         <!-- SPCE -->
-        <div class="mini-card" id="mini-SPCE" onclick="loadChart('SPCE','Virgin Galactic','NYSE')">
+        <div class="mini-card" id="mini-SPCE" onclick="loadChart('SPCE')">
           <div class="mini-card-header">
             <span class="mini-sym">SPCE</span>
             <span class="mini-chg down">-1.4%</span>
@@ -550,7 +533,7 @@
         </div>
 
         <!-- MNTS -->
-        <div class="mini-card" id="mini-MNTS" onclick="loadChart('MNTS','Momentus Inc','NASDAQ')">
+        <div class="mini-card" id="mini-MNTS" onclick="loadChart('MNTS')">
           <div class="mini-card-header">
             <span class="mini-sym">MNTS</span>
             <span class="mini-chg up">+0.7%</span>
@@ -653,7 +636,6 @@
 </div>
 
 <script>
-  // ── 종목 맵 ──
   const symbolMap = {
     'SATL': { exchange:'NASDAQ', name:'Satixfy Space Systems · NASDAQ' },
     'RKLB': { exchange:'NASDAQ', name:'Rocket Lab USA · NASDAQ' },
@@ -670,40 +652,29 @@
 
   const intervalMap = { '1D':'D', '1W':'W', '1M':'M', '3M':'3M', '1Y':'12M' };
 
-  function buildMainWidget(sym, interval) {
+  function buildIframeSrc(sym, interval) {
     const { exchange } = symbolMap[sym];
-    return `
-      <div class="tradingview-widget-container" style="height:100%;width:100%">
-        <div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-        {
-          "autosize": true,
-          "symbol": "${exchange}:${sym}",
-          "interval": "${interval}",
-          "timezone": "Asia/Seoul",
-          "theme": "light",
-          "style": "1",
-          "locale": "kr",
-          "backgroundColor": "#ffffff",
-          "gridColor": "rgba(184,208,234,0.4)",
-          "hide_top_toolbar": false,
-          "hide_legend": false,
-          "allow_symbol_change": false,
-          "save_image": true,
-          "calendar": false,
-          "support_host": "https://www.tradingview.com"
-        }
-        <\/script>
-      </div>`;
+    const encoded = encodeURIComponent(exchange + ':' + sym);
+    return `https://www.tradingview.com/widgetembed/?frameElementId=tv-iframe`
+      + `&symbol=${encoded}`
+      + `&interval=${interval}`
+      + `&hidesidetoolbar=0&symboledit=0&saveimage=1`
+      + `&toolbarbg=f1f3f6&theme=light&style=1`
+      + `&timezone=Asia%2FSeoul&withdateranges=1&locale=kr`;
   }
 
-  function loadChart(sym, company, exchange) {
-    if (currentSym === sym) return;
+  function updateChart() {
+    document.getElementById('tv-iframe').src = buildIframeSrc(currentSym, currentInterval);
+  }
+
+  function loadChart(sym, _company, _exchange, clickedEl) {
     currentSym = sym;
 
     // 티커 스트립 active
     document.querySelectorAll('.ticker-item').forEach(el => el.classList.remove('active'));
-    event.currentTarget.classList.add('active');
+    // clickedEl이 ticker-item이면 그것만, 아니면 data 매칭
+    const ticker = document.querySelector(`.ticker-item[data-sym="${sym}"]`);
+    if (ticker) ticker.classList.add('active');
 
     // 미니 카드 active
     document.querySelectorAll('.mini-card').forEach(el => el.classList.remove('active-card'));
@@ -714,18 +685,14 @@
     document.getElementById('chart-sym').textContent = sym;
     document.getElementById('chart-company').textContent = symbolMap[sym].name;
 
-    // 메인 차트 교체
-    const wrap = document.getElementById('tv-main');
-    wrap.innerHTML = buildMainWidget(sym, currentInterval);
+    updateChart();
   }
 
   function setTF(btn, tf) {
     document.querySelectorAll('.tf-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     currentInterval = intervalMap[tf] || 'W';
-
-    const wrap = document.getElementById('tv-main');
-    wrap.innerHTML = buildMainWidget(currentSym, currentInterval);
+    updateChart();
   }
 </script>
 </body>
