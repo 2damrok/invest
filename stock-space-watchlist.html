@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>우주 테마 관심종목 — 경찬의 노트</title>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#ffffff; --bg2:#f9f9f8; --bg3:#f1f0ee; --border:#e8e7e4;
+    --ink:#1a1a19; --ink2:#37352f; --ink3:#9b9a97; --ink4:#c9c8c4;
+    --accent:#2e6da4; --accent-bg:#ebf3fb; --accent-border:#bdd4eb;
+    --green:#0b7a46; --green-bg:#e7f4ee; --green-border:#a8d8bc;
+    --red:#c0392b; --red-bg:#fdf0ef; --red-border:#f0b8b3;
+    --amber:#9b6b00; --amber-bg:#fdf4e7; --amber-border:#f0d59a;
+    --purple:#5b3fa0; --purple-bg:#f0ecfb; --purple-border:#c9b8ee;
+
+    /* Space palette — light */
+    --space-bg: #eef4fc;
+    --space-bg2: #e4eef9;
+    --space-bg3: #d8e8f5;
+    --space-border: #b8d0ea;
+    --space-text: #1a3050;
+    --space-dim: #5a7a9e;
+    --space-accent: #1a6ec4;
+    --space-green: #0b7a46;
+    --space-red: #c0392b;
+    --space-gold: #9b6b00;
+
+    --font: 'Nanum Gothic', -apple-system, sans-serif;
+    --mono: 'Space Mono', monospace;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--ink2); font-family:var(--font); font-size:14px; }
+  a { text-decoration:none; color:inherit; }
+
+  /* ── APP SHELL ── */
+  .app { display:flex; min-height:100vh; }
+
+  /* ── SIDEBAR (V3 style) ── */
+  .sidebar {
+    width:240px; min-width:240px; background:var(--bg2);
+    border-right:1px solid var(--border);
+    position:sticky; top:0; height:100vh; overflow-y:auto;
+  }
+  .sidebar-header {
+    padding:14px 16px 10px; border-bottom:1px solid var(--border);
+    display:flex; align-items:center; gap:10px;
+  }
+  .workspace-icon {
+    width:28px; height:28px; border-radius:6px; background:var(--ink2);
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-size:13px; font-weight:800; flex-shrink:0;
+  }
+  .workspace-name { font-size:14px; font-weight:700; color:var(--ink); }
+  .workspace-sub { font-size:11px; color:var(--ink3); }
+  .nav-section { padding:8px 0; }
+  .nav-label {
+    font-size:10px; font-weight:700; color:var(--ink4);
+    padding:6px 16px 4px; letter-spacing:.08em; text-transform:uppercase;
+  }
+  .nav-item {
+    display:flex; align-items:center; gap:8px;
+    padding:5px 16px; font-size:13px; color:var(--ink3);
+    cursor:pointer; transition:background .1s;
+  }
+  .nav-item:hover { background:var(--bg3); color:var(--ink2); }
+  .nav-item.active { background:var(--bg3); color:var(--ink); font-weight:700; }
+  .nav-item-count {
+    margin-left:auto; font-size:11px; color:var(--ink4);
+    background:var(--border); padding:1px 6px; border-radius:10px;
+  }
+  .sidebar-divider { height:1px; background:var(--border); margin:4px 0; }
+
+  /* ── TOPBAR ── */
+  .main { flex:1; min-width:0; overflow:hidden; }
+  .topbar {
+    position:sticky; top:0; z-index:10;
+    background:rgba(255,255,255,.95); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border);
+    padding:0 2.5rem; height:48px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .breadcrumb { font-size:13px; color:var(--ink3); display:flex; align-items:center; gap:6px; }
+  .breadcrumb .sep { color:var(--ink4); }
+  .breadcrumb .current { color:var(--ink2); font-weight:700; }
+
+  /* ── SPACE HERO BAND ── */
+  .space-hero {
+    background: var(--space-bg);
+    background-image:
+      radial-gradient(ellipse at 20% 50%, rgba(77,166,255,.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(91,63,160,.1) 0%, transparent 50%);
+    padding: 2.5rem 2.5rem 2rem;
+    border-bottom: 1px solid var(--space-border);
+    position: relative;
+    overflow: hidden;
+  }
+  /* Star field */
+  .space-hero::before {
+    content:'';
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 70%, rgba(255,255,255,.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 35%, rgba(255,255,255,.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 80%, rgba(255,255,255,.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 15%, rgba(255,255,255,.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 55%, rgba(255,255,255,.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 15% 90%, rgba(255,255,255,.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 92% 30%, rgba(255,255,255,.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 48% 10%, rgba(255,255,255,.3) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 78% 88%, rgba(255,255,255,.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 33% 50%, rgba(200,220,255,.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 62% 42%, rgba(200,220,255,.3) 0%, transparent 100%);
+    pointer-events:none;
+  }
+  .hero-inner { position:relative; z-index:1; }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size:10px; letter-spacing:3px; text-transform:uppercase;
+    color:var(--space-accent); margin-bottom:10px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .hero-dot { width:6px; height:6px; border-radius:50%; background:var(--space-accent); animation:pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.3;} }
+  .hero-title {
+    font-size:26px; font-weight:800; color:var(--space-text);
+    margin-bottom:6px; line-height:1.2;
+  }
+  .hero-title span { color:var(--space-accent); }
+  .hero-desc { font-size:13px; color:var(--space-dim); margin-bottom:1.5rem; }
+
+  /* Ticker strip */
+  .ticker-strip {
+    display:flex; gap:20px; flex-wrap:wrap;
+  }
+  .ticker-item {
+    display:flex; flex-direction:column; gap:2px;
+    background:rgba(255,255,255,.7);
+    border:1px solid var(--space-border);
+    border-radius:6px; padding:8px 14px; cursor:pointer;
+    transition:border-color .15s, background .15s;
+    min-width:90px;
+  }
+  .ticker-item:hover { border-color:var(--space-accent); background:rgba(26,110,196,.06); }
+  .ticker-item.active { border-color:var(--space-accent); background:rgba(26,110,196,.10); }
+  .ticker-sym { font-family:var(--mono); font-size:13px; font-weight:700; color:var(--space-text); }
+  .ticker-name { font-size:10px; color:var(--space-dim); white-space:nowrap; }
+  .ticker-chg { font-family:var(--mono); font-size:11px; font-weight:700; }
+  .ticker-chg.up { color:var(--space-green); }
+  .ticker-chg.down { color:var(--space-red); }
+
+  /* ── CHART AREA ── */
+  .chart-area { background:var(--space-bg2); padding:1.5rem 2.5rem 2rem; border-bottom:1px solid var(--space-border); }
+
+  .chart-controls {
+    display:flex; align-items:center; justify-content:space-between;
+    margin-bottom:1rem; flex-wrap:wrap; gap:8px;
+  }
+  .chart-title-row { display:flex; align-items:center; gap:12px; }
+  .chart-sym-badge {
+    font-family:var(--mono); font-size:18px; font-weight:700; color:var(--space-text);
+  }
+  .chart-company { font-size:13px; color:var(--space-dim); }
+
+  .timeframe-btns { display:flex; gap:4px; }
+  .tf-btn {
+    font-family:var(--mono); font-size:11px;
+    padding:4px 10px; border:1px solid var(--space-border);
+    background:rgba(255,255,255,.7); color:var(--space-dim);
+    border-radius:4px; cursor:pointer; transition:all .1s;
+  }
+  .tf-btn:hover { color:var(--space-text); border-color:var(--space-accent); background:#fff; }
+  .tf-btn.active { background:var(--space-accent); color:#fff; border-color:var(--space-accent); }
+
+  /* TradingView chart container */
+  .tv-wrap {
+    border:1px solid var(--space-border);
+    border-radius:8px; overflow:hidden;
+    background:#fff;
+    height:480px;
+  }
+  .tv-wrap iframe,
+  .tv-wrap > div { width:100% !important; height:100% !important; }
+
+  /* ── BOTTOM GRID ── */
+  .bottom-section {
+    background:var(--bg); padding:2rem 2.5rem 3rem;
+    border-top:1px solid var(--border);
+  }
+  .section-heading {
+    display:flex; align-items:center; justify-content:space-between;
+    margin-bottom:1.2rem;
+  }
+  .section-heading-left { display:flex; align-items:center; gap:10px; }
+  .sec-icon {
+    width:26px; height:26px; border-radius:6px; background:var(--ink);
+    color:#fff; font-size:13px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .sec-title { font-size:15px; font-weight:800; color:var(--ink); }
+
+  /* Mini chart grid */
+  .mini-grid {
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:12px;
+    margin-bottom:2rem;
+  }
+  .mini-card {
+    border:1px solid var(--border); border-radius:8px;
+    overflow:hidden; cursor:pointer;
+    transition:border-color .15s, box-shadow .15s;
+    background:var(--bg);
+  }
+  .mini-card:hover { border-color:#bbb; box-shadow:0 2px 8px rgba(0,0,0,.07); }
+  .mini-card.active-card { border-color:var(--accent); box-shadow:0 0 0 2px var(--accent-bg); }
+  .mini-card-header {
+    padding:10px 12px 6px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .mini-sym { font-family:var(--mono); font-size:13px; font-weight:700; color:var(--ink); }
+  .mini-chg { font-family:var(--mono); font-size:11px; font-weight:700; }
+  .mini-chg.up { color:var(--green); }
+  .mini-chg.down { color:var(--red); }
+  .mini-company { font-size:10px; color:var(--ink3); padding:0 12px 8px; line-height:1.4; }
+  .mini-chart-box { height:80px; background:var(--bg2); border-top:1px solid var(--border); }
+  .mini-chart-box iframe,
+  .mini-chart-box > div { width:100% !important; height:100% !important; }
+
+  /* Note tags */
+  .chip {
+    font-size:11px; padding:2px 8px; border-radius:4px;
+    border:1px solid transparent; font-weight:700; white-space:nowrap; display:inline-block;
+  }
+  .chip-blue { background:var(--accent-bg); color:var(--accent); border-color:var(--accent-border); }
+  .chip-default { background:var(--bg3); color:var(--ink3); border-color:var(--border); }
+  .chip-amber { background:var(--amber-bg); color:var(--amber); border-color:var(--amber-border); }
+
+  /* Watchlist note table */
+  .watch-table { width:100%; border-collapse:collapse; font-size:13px; }
+  .watch-table th {
+    font-size:11px; font-weight:700; color:var(--ink3); text-align:left;
+    padding:8px 12px; border-bottom:2px solid var(--border); background:var(--bg2);
+  }
+  .watch-table td { padding:11px 12px; border-bottom:1px solid var(--border); vertical-align:middle; }
+  .watch-table tr:last-child td { border-bottom:none; }
+  .watch-table tr:hover td { background:var(--bg2); cursor:pointer; }
+  .sym-col { font-family:var(--mono); font-weight:700; color:var(--ink); }
+  .name-col { color:var(--ink2); }
+  .theme-col { font-size:11px; color:var(--ink3); }
+  .memo-col { font-size:12px; color:var(--ink3); max-width:240px; line-height:1.5; }
+
+  /* Callout */
+  .callout {
+    border-radius:8px; padding:13px 16px;
+    display:flex; gap:12px; margin-bottom:1.5rem;
+    font-size:13.5px; line-height:1.7;
+  }
+  .callout-icon { font-size:17px; flex-shrink:0; }
+  .callout-blue { background:var(--accent-bg); border:1px solid var(--accent-border); color:var(--ink2); }
+
+  .divider { height:1px; background:var(--border); margin:2rem 0; }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar">
+    <a href="stock-home.html" class="sidebar-header">
+      <div class="workspace-icon">찬</div>
+      <div>
+        <div class="workspace-name">경찬의 노트</div>
+        <div class="workspace-sub">투자 공부 정리</div>
+      </div>
+    </a>
+    <nav>
+      <div class="nav-section">
+        <a href="stock-home.html" class="nav-item"><span>🏠</span> 홈</a>
+        <div class="nav-item"><span>🔍</span> 검색</div>
+      </div>
+      <div class="sidebar-divider"></div>
+      <div class="nav-section">
+        <div class="nav-label">전체 노트</div>
+        <div class="nav-item"><span>📋</span> 전체 <span class="nav-item-count">43</span></div>
+        <a href="stock-category.html" class="nav-item"><span>🏭</span> 기업분석 <span class="nav-item-count">18</span></a>
+        <div class="nav-item"><span>📊</span> 차트분석 <span class="nav-item-count">11</span></div>
+        <div class="nav-item"><span>🌐</span> 매크로 <span class="nav-item-count">8</span></div>
+        <div class="nav-item"><span>📁</span> ETF <span class="nav-item-count">5</span></div>
+      </div>
+      <div class="sidebar-divider"></div>
+      <div class="nav-section">
+        <div class="nav-label">관심종목</div>
+        <div class="nav-item active"><span>🚀</span> 우주 테마 <span class="nav-item-count">8</span></div>
+      </div>
+      <div class="sidebar-divider"></div>
+      <div class="nav-section">
+        <div class="nav-label">자료 유형</div>
+        <div class="nav-item"><span>📝</span> 텍스트 노트 <span class="nav-item-count">35</span></div>
+        <div class="nav-item"><span>🖼</span> 이미지 자료 <span class="nav-item-count">8</span></div>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- ── MAIN ── -->
+  <div class="main">
+
+    <div class="topbar">
+      <div class="breadcrumb">
+        <a href="stock-home.html" style="color:var(--ink3);">홈</a>
+        <span class="sep">/</span>
+        <span class="current">🚀 우주 테마 관심종목</span>
+      </div>
+    </div>
+
+    <!-- ── SPACE HERO ── -->
+    <div class="space-hero">
+      <div class="hero-inner">
+        <div class="hero-eyebrow">
+          <span class="hero-dot"></span>
+          WATCHLIST · SPACE &amp; DEFENSE
+        </div>
+        <div class="hero-title">🚀 <span>우주 테마</span> 관심종목</div>
+        <div class="hero-desc">뉴 스페이스 시대의 수혜주 — 발사체 · 위성 · 궤도 인프라 · 방산 융합 섹터</div>
+
+        <!-- 티커 스트립 -->
+        <div class="ticker-strip" id="ticker-strip">
+          <div class="ticker-item active" onclick="loadChart('SATL','Satixfy Space Systems','NASDAQ')">
+            <div class="ticker-sym">SATL</div>
+            <div class="ticker-name">Satixfy Space</div>
+            <div class="ticker-chg up" id="chg-SATL">+0.00%</div>
+          </div>
+          <div class="ticker-item" onclick="loadChart('RKLB','Rocket Lab USA','NASDAQ')">
+            <div class="ticker-sym">RKLB</div>
+            <div class="ticker-name">Rocket Lab</div>
+            <div class="ticker-chg up" id="chg-RKLB">+0.00%</div>
+          </div>
+          <div class="ticker-item" onclick="loadChart('RDW','Redwire Corp','NYSE')">
+            <div class="ticker-sym">RDW</div>
+            <div class="ticker-name">Redwire Corp</div>
+            <div class="ticker-chg down" id="chg-RDW">+0.00%</div>
+          </div>
+          <div class="ticker-item" onclick="loadChart('RCAT','Red Cat Holdings','NASDAQ')">
+            <div class="ticker-sym">RCAT</div>
+            <div class="ticker-name">Red Cat Holdings</div>
+            <div class="ticker-chg up" id="chg-RCAT">+0.00%</div>
+          </div>
+          <div class="ticker-item" onclick="loadChart('ASTS','AST SpaceMobile','NASDAQ')">
+            <div class="ticker-sym">ASTS</div>
+            <div class="ticker-name">AST SpaceMobile</div>
+            <div class="ticker-chg up" id="chg-ASTS">+0.00%</div>
+          </div>
+          <div class="ticker-item" onclick="loadChart('LUNR','Intuitive Machines','NASDAQ')">
+            <div class="ticker-sym">LUNR</div>
+            <div class="ticker-name">Intuitive Machines</div>
+            <div class="ticker-chg up" id="chg-LUNR">+0.00%</div>
+          </div>
+          <div class="ticker-item" onclick="loadChart('SPCE','Virgin Galactic','NYSE')">
+            <div class="ticker-sym">SPCE</div>
+            <div class="ticker-name">Virgin Galactic</div>
+            <div class="ticker-chg down" id="chg-SPCE">+0.00%</div>
+          </div>
+          <div class="ticker-item" onclick="loadChart('MNTS','Momentus Inc','NASDAQ')">
+            <div class="ticker-sym">MNTS</div>
+            <div class="ticker-name">Momentus Inc</div>
+            <div class="ticker-chg up" id="chg-MNTS">+0.00%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── MAIN CHART ── -->
+    <div class="chart-area">
+      <div class="chart-controls">
+        <div class="chart-title-row">
+          <span class="chart-sym-badge" id="chart-sym">SATL</span>
+          <span class="chart-company" id="chart-company">Satixfy Space Systems · NASDAQ</span>
+        </div>
+        <div class="timeframe-btns">
+          <button class="tf-btn" onclick="setTF(this,'1D')">1D</button>
+          <button class="tf-btn active" onclick="setTF(this,'1W')">1W</button>
+          <button class="tf-btn" onclick="setTF(this,'1M')">1M</button>
+          <button class="tf-btn" onclick="setTF(this,'3M')">3M</button>
+          <button class="tf-btn" onclick="setTF(this,'1Y')">1Y</button>
+        </div>
+      </div>
+
+      <div class="tv-wrap" id="tv-main">
+        <!-- TradingView Advanced Chart Widget -->
+        <div class="tradingview-widget-container" style="height:100%;width:100%">
+          <div class="tradingview-widget-container__widget" style="height:calc(100%);width:100%"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+          {
+            "autosize": true,
+            "symbol": "NASDAQ:SATL",
+            "interval": "W",
+            "timezone": "Asia/Seoul",
+            "theme": "light",
+            "style": "1",
+            "locale": "kr",
+            "backgroundColor": "#ffffff",
+            "gridColor": "rgba(184,208,234,0.4)",
+            "hide_top_toolbar": false,
+            "hide_legend": false,
+            "allow_symbol_change": false,
+            "save_image": true,
+            "calendar": false,
+            "support_host": "https://www.tradingview.com"
+          }
+          </script>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── MINI CHART GRID + TABLE ── -->
+    <div class="bottom-section">
+
+      <div class="callout callout-blue">
+        <span class="callout-icon">💡</span>
+        <div>위 티커 또는 미니 카드를 클릭하면 메인 차트가 전환돼요. 종목 옆에 <strong>간단 메모</strong>를 추가하거나 노트 링크를 연결할 수 있어요.</div>
+      </div>
+
+      <div class="section-heading">
+        <div class="section-heading-left">
+          <div class="sec-icon">📊</div>
+          <div class="sec-title">미니 차트</div>
+        </div>
+      </div>
+
+      <div class="mini-grid">
+        <!-- SATL -->
+        <div class="mini-card active-card" id="mini-SATL" onclick="loadChart('SATL','Satixfy Space Systems','NASDAQ')">
+          <div class="mini-card-header">
+            <span class="mini-sym">SATL</span>
+            <span class="mini-chg up">+2.4%</span>
+          </div>
+          <div class="mini-company">Satixfy Space Systems</div>
+          <div class="mini-chart-box">
+            <div class="tradingview-widget-container" style="height:100%;width:100%">
+              <div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
+              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+              {"symbol":"NASDAQ:SATL","width":"100%","height":"100%","locale":"kr","dateRange":"3M","colorTheme":"light","isTransparent":true,"autosize":true,"largeChartUrl":""}
+              </script>
+            </div>
+          </div>
+        </div>
+
+        <!-- RKLB -->
+        <div class="mini-card" id="mini-RKLB" onclick="loadChart('RKLB','Rocket Lab USA','NASDAQ')">
+          <div class="mini-card-header">
+            <span class="mini-sym">RKLB</span>
+            <span class="mini-chg up">+1.8%</span>
+          </div>
+          <div class="mini-company">Rocket Lab USA</div>
+          <div class="mini-chart-box">
+            <div class="tradingview-widget-container" style="height:100%;width:100%">
+              <div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
+              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+              {"symbol":"NASDAQ:RKLB","width":"100%","height":"100%","locale":"kr","dateRange":"3M","colorTheme":"light","isTransparent":true,"autosize":true,"largeChartUrl":""}
+              </script>
+            </div>
+          </div>
+        </div>
+
+        <!-- RDW -->
+        <div class="mini-card" id="mini-RDW" onclick="loadChart('RDW','Redwire Corp','NYSE')">
+          <div class="mini-card-header">
+            <span class="mini-sym">RDW</span>
+            <span class="mini-chg down">-0.9%</span>
+          </div>
+          <div class="mini-company">Redwire Corp</div>
+          <div class="mini-chart-box">
+            <div class="tradingview-widget-container" style="height:100%;width:100%">
+              <div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
+              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+              {"symbol":"NYSE:RDW","width":"100%","height":"100%","locale":"kr","dateRange":"3M","colorTheme":"light","isTransparent":true,"autosize":true,"largeChartUrl":""}
+              </script>
+            </div>
+          </div>
+        </div>
+
+        <!-- RCAT -->
+        <div class="mini-card" id="mini-RCAT" onclick="loadChart('RCAT','Red Cat Holdings','NASDAQ')">
+          <div class="mini-card-header">
+            <span class="mini-sym">RCAT</span>
+            <span class="mini-chg up">+3.1%</span>
+          </div>
+          <div class="mini-company">Red Cat Holdings</div>
+          <div class="mini-chart-box">
+            <div class="tradingview-widget-container" style="height:100%;width:100%">
+              <div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
+              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+              {"symbol":"NASDAQ:RCAT","width":"100%","height":"100%","locale":"kr","dateRange":"3M","colorTheme":"light","isTransparent":true,"autosize":true,"largeChartUrl":""}
+              </script>
+            </div>
+          </div>
+        </div>
+
+        <!-- ASTS -->
+        <div class="mini-card" id="mini-ASTS" onclick="loadChart('ASTS','AST SpaceMobile','NASDAQ')">
+          <div class="mini-card-header">
+            <span class="mini-sym">ASTS</span>
+            <span class="mini-chg up">+5.2%</span>
+          </div>
+          <div class="mini-company">AST SpaceMobile</div>
+          <div class="mini-chart-box">
+            <div class="tradingview-widget-container" style="height:100%;width:100%">
+              <div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
+              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+              {"symbol":"NASDAQ:ASTS","width":"100%","height":"100%","locale":"kr","dateRange":"3M","colorTheme":"light","isTransparent":true,"autosize":true,"largeChartUrl":""}
+              </script>
+            </div>
+          </div>
+        </div>
+
+        <!-- LUNR -->
+        <div class="mini-card" id="mini-LUNR" onclick="loadChart('LUNR','Intuitive Machines','NASDAQ')">
+          <div class="mini-card-header">
+            <span class="mini-sym">LUNR</span>
+            <span class="mini-chg up">+1.2%</span>
+          </div>
+          <div class="mini-company">Intuitive Machines</div>
+          <div class="mini-chart-box">
+            <div class="tradingview-widget-container" style="height:100%;width:100%">
+              <div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
+              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+              {"symbol":"NASDAQ:LUNR","width":"100%","height":"100%","locale":"kr","dateRange":"3M","colorTheme":"light","isTransparent":true,"autosize":true,"largeChartUrl":""}
+              </script>
+            </div>
+          </div>
+        </div>
+
+        <!-- SPCE -->
+        <div class="mini-card" id="mini-SPCE" onclick="loadChart('SPCE','Virgin Galactic','NYSE')">
+          <div class="mini-card-header">
+            <span class="mini-sym">SPCE</span>
+            <span class="mini-chg down">-1.4%</span>
+          </div>
+          <div class="mini-company">Virgin Galactic</div>
+          <div class="mini-chart-box">
+            <div class="tradingview-widget-container" style="height:100%;width:100%">
+              <div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
+              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+              {"symbol":"NYSE:SPCE","width":"100%","height":"100%","locale":"kr","dateRange":"3M","colorTheme":"light","isTransparent":true,"autosize":true,"largeChartUrl":""}
+              </script>
+            </div>
+          </div>
+        </div>
+
+        <!-- MNTS -->
+        <div class="mini-card" id="mini-MNTS" onclick="loadChart('MNTS','Momentus Inc','NASDAQ')">
+          <div class="mini-card-header">
+            <span class="mini-sym">MNTS</span>
+            <span class="mini-chg up">+0.7%</span>
+          </div>
+          <div class="mini-company">Momentus Inc</div>
+          <div class="mini-chart-box">
+            <div class="tradingview-widget-container" style="height:100%;width:100%">
+              <div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
+              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+              {"symbol":"NASDAQ:MNTS","width":"100%","height":"100%","locale":"kr","dateRange":"3M","colorTheme":"light","isTransparent":true,"autosize":true,"largeChartUrl":""}
+              </script>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /mini-grid -->
+
+      <div class="divider"></div>
+
+      <!-- 종목 메모 테이블 -->
+      <div class="section-heading">
+        <div class="section-heading-left">
+          <div class="sec-icon" style="background:var(--bg3);color:var(--ink3);font-size:14px;">📝</div>
+          <div class="sec-title">종목 메모</div>
+        </div>
+      </div>
+
+      <table class="watch-table">
+        <thead>
+          <tr>
+            <th style="width:7%">티커</th>
+            <th style="width:18%">종목명</th>
+            <th style="width:14%">테마</th>
+            <th style="width:13%">상장</th>
+            <th>관심 이유 / 메모</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="sym-col">SATL</td>
+            <td class="name-col">Satixfy Space Systems</td>
+            <td><span class="chip chip-blue">위성 통신</span></td>
+            <td style="font-size:12px;color:var(--ink3);">NASDAQ</td>
+            <td class="memo-col">저궤도(LEO) 위성용 고성능 통신 칩 개발. VIASAT·AST와 협력 가능성. 소형 팹리스 구조로 마진 레버리지 기대.</td>
+          </tr>
+          <tr>
+            <td class="sym-col">RKLB</td>
+            <td class="name-col">Rocket Lab USA</td>
+            <td><span class="chip chip-amber">발사체</span></td>
+            <td style="font-size:12px;color:var(--ink3);">NASDAQ</td>
+            <td class="memo-col">Electron 소형 발사체 + Neutron 중형 개발 중. 우주 부품·위성 버스 수직계열화 전략 주목. SpaceX 대항마 중 가장 현실적.</td>
+          </tr>
+          <tr>
+            <td class="sym-col">RDW</td>
+            <td class="name-col">Redwire Corp</td>
+            <td><span class="chip chip-default">궤도 인프라</span></td>
+            <td style="font-size:12px;color:var(--ink3);">NYSE</td>
+            <td class="memo-col">ISS 부품·우주 제조 장비 공급. NASA·방산 계약 기반. 적자 지속이나 수주잔고 증가 추세 확인 중.</td>
+          </tr>
+          <tr>
+            <td class="sym-col">RCAT</td>
+            <td class="name-col">Red Cat Holdings</td>
+            <td><span class="chip chip-default">드론·방산</span></td>
+            <td style="font-size:12px;color:var(--ink3);">NASDAQ</td>
+            <td class="memo-col">군용 소형 드론 공급사. 우크라이나 전쟁 이후 방산 드론 수요 급증 수혜. 우주 테마보단 방산 드론 섹터 중첩.</td>
+          </tr>
+          <tr>
+            <td class="sym-col">ASTS</td>
+            <td class="name-col">AST SpaceMobile</td>
+            <td><span class="chip chip-blue">위성 통신</span></td>
+            <td style="font-size:12px;color:var(--ink3);">NASDAQ</td>
+            <td class="memo-col">일반 스마트폰과 직접 연결되는 위성 브로드밴드 네트워크 구축 중. AT&T·Verizon 파트너십. 기술 실현 가능성 검증 단계.</td>
+          </tr>
+          <tr>
+            <td class="sym-col">LUNR</td>
+            <td class="name-col">Intuitive Machines</td>
+            <td><span class="chip chip-default">달 탐사</span></td>
+            <td style="font-size:12px;color:var(--ink3);">NASDAQ</td>
+            <td class="memo-col">NASA CLPS 프로그램 수혜 — 달 화물 착륙선 공급. 2024년 달 착륙 성공(IM-1). 후속 미션 계약 수주 주목.</td>
+          </tr>
+          <tr>
+            <td class="sym-col">SPCE</td>
+            <td class="name-col">Virgin Galactic</td>
+            <td><span class="chip chip-default">우주 관광</span></td>
+            <td style="font-size:12px;color:var(--ink3);">NYSE</td>
+            <td class="memo-col">우주 관광 선구자지만 델타급 차세대 기체 개발로 전환 중. 2025~2026 재운항 목표. 높은 리스크·높은 기대감 병존 종목.</td>
+          </tr>
+          <tr>
+            <td class="sym-col">MNTS</td>
+            <td class="name-col">Momentus Inc</td>
+            <td><span class="chip chip-default">우주 운송</span></td>
+            <td style="font-size:12px;color:var(--ink3);">NASDAQ</td>
+            <td class="memo-col">궤도 내 운송(Space Tug) 서비스 제공. 위성 정밀 배치·궤도 이동 서비스. 소규모 기업으로 계약 성사 여부가 핵심 변수.</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── 종목 맵 ──
+  const symbolMap = {
+    'SATL': { exchange:'NASDAQ', name:'Satixfy Space Systems · NASDAQ' },
+    'RKLB': { exchange:'NASDAQ', name:'Rocket Lab USA · NASDAQ' },
+    'RDW':  { exchange:'NYSE',   name:'Redwire Corp · NYSE' },
+    'RCAT': { exchange:'NASDAQ', name:'Red Cat Holdings · NASDAQ' },
+    'ASTS': { exchange:'NASDAQ', name:'AST SpaceMobile · NASDAQ' },
+    'LUNR': { exchange:'NASDAQ', name:'Intuitive Machines · NASDAQ' },
+    'SPCE': { exchange:'NYSE',   name:'Virgin Galactic · NYSE' },
+    'MNTS': { exchange:'NASDAQ', name:'Momentus Inc · NASDAQ' },
+  };
+
+  let currentSym = 'SATL';
+  let currentInterval = 'W';
+
+  const intervalMap = { '1D':'D', '1W':'W', '1M':'M', '3M':'3M', '1Y':'12M' };
+
+  function buildMainWidget(sym, interval) {
+    const { exchange } = symbolMap[sym];
+    return `
+      <div class="tradingview-widget-container" style="height:100%;width:100%">
+        <div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+        {
+          "autosize": true,
+          "symbol": "${exchange}:${sym}",
+          "interval": "${interval}",
+          "timezone": "Asia/Seoul",
+          "theme": "light",
+          "style": "1",
+          "locale": "kr",
+          "backgroundColor": "#ffffff",
+          "gridColor": "rgba(184,208,234,0.4)",
+          "hide_top_toolbar": false,
+          "hide_legend": false,
+          "allow_symbol_change": false,
+          "save_image": true,
+          "calendar": false,
+          "support_host": "https://www.tradingview.com"
+        }
+        <\/script>
+      </div>`;
+  }
+
+  function loadChart(sym, company, exchange) {
+    if (currentSym === sym) return;
+    currentSym = sym;
+
+    // 티커 스트립 active
+    document.querySelectorAll('.ticker-item').forEach(el => el.classList.remove('active'));
+    event.currentTarget.classList.add('active');
+
+    // 미니 카드 active
+    document.querySelectorAll('.mini-card').forEach(el => el.classList.remove('active-card'));
+    const mc = document.getElementById('mini-' + sym);
+    if (mc) mc.classList.add('active-card');
+
+    // 헤더 업데이트
+    document.getElementById('chart-sym').textContent = sym;
+    document.getElementById('chart-company').textContent = symbolMap[sym].name;
+
+    // 메인 차트 교체
+    const wrap = document.getElementById('tv-main');
+    wrap.innerHTML = buildMainWidget(sym, currentInterval);
+  }
+
+  function setTF(btn, tf) {
+    document.querySelectorAll('.tf-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentInterval = intervalMap[tf] || 'W';
+
+    const wrap = document.getElementById('tv-main');
+    wrap.innerHTML = buildMainWidget(currentSym, currentInterval);
+  }
+</script>
+</body>
+</html>
