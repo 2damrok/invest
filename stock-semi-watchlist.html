@@ -14,8 +14,6 @@
     --red:#c0392b; --red-bg:#fdf0ef; --red-border:#f0b8b3;
     --amber:#9b6b00; --amber-bg:#fdf4e7; --amber-border:#f0d59a;
     --purple:#5b3fa0; --purple-bg:#f0ecfb; --purple-border:#c9b8ee;
-
-    /* Semi palette — warm amber/orange light */
     --space-bg: #fdf6ee;
     --space-bg2: #faeedd;
     --space-bg3: #f5e2c4;
@@ -26,18 +24,13 @@
     --space-green: #0b7a46;
     --space-red: #c0392b;
     --space-gold: #9b6b00;
-
     --font: 'Nanum Gothic', -apple-system, sans-serif;
     --mono: 'Space Mono', monospace;
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { background:var(--bg); color:var(--ink2); font-family:var(--font); font-size:14px; }
   a { text-decoration:none; color:inherit; }
-
-  /* ── APP SHELL ── */
   .app { display:flex; min-height:100vh; }
-
-  /* ── SIDEBAR (V3 style) ── */
   .sidebar {
     width:240px; min-width:240px; background:var(--bg2);
     border-right:1px solid var(--border);
@@ -71,8 +64,6 @@
     background:var(--border); padding:1px 6px; border-radius:10px;
   }
   .sidebar-divider { height:1px; background:var(--border); margin:4px 0; }
-
-  /* ── TOPBAR ── */
   .main { flex:1; min-width:0; overflow:hidden; }
   .topbar {
     position:sticky; top:0; z-index:10;
@@ -84,8 +75,6 @@
   .breadcrumb { font-size:13px; color:var(--ink3); display:flex; align-items:center; gap:6px; }
   .breadcrumb .sep { color:var(--ink4); }
   .breadcrumb .current { color:var(--ink2); font-weight:700; }
-
-  /* ── SPACE HERO BAND ── */
   .space-hero {
     background: var(--space-bg);
     background-image:
@@ -93,26 +82,23 @@
       radial-gradient(ellipse at 80% 20%, rgba(184,108,0,.1) 0%, transparent 50%);
     padding: 2.5rem 2.5rem 2rem;
     border-bottom: 1px solid var(--space-border);
-    position: relative;
-    overflow: hidden;
+    position: relative; overflow: hidden;
   }
-  /* Star field */
   .space-hero::before {
-    content:'';
-    position:absolute; inset:0;
+    content:''; position:absolute; inset:0;
     background-image:
-      radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,.6) 0%, transparent 100%),
-      radial-gradient(1px 1px at 25% 70%, rgba(255,255,255,.4) 0%, transparent 100%),
-      radial-gradient(1px 1px at 40% 35%, rgba(255,255,255,.5) 0%, transparent 100%),
-      radial-gradient(1px 1px at 55% 80%, rgba(255,255,255,.3) 0%, transparent 100%),
-      radial-gradient(1px 1px at 70% 15%, rgba(255,255,255,.6) 0%, transparent 100%),
-      radial-gradient(1px 1px at 85% 55%, rgba(255,255,255,.4) 0%, transparent 100%),
-      radial-gradient(1.5px 1.5px at 15% 90%, rgba(255,255,255,.5) 0%, transparent 100%),
-      radial-gradient(1px 1px at 92% 30%, rgba(255,255,255,.6) 0%, transparent 100%),
-      radial-gradient(1px 1px at 48% 10%, rgba(255,255,255,.3) 0%, transparent 100%),
-      radial-gradient(1.5px 1.5px at 78% 88%, rgba(255,255,255,.5) 0%, transparent 100%),
-      radial-gradient(1px 1px at 33% 50%, rgba(200,220,255,.4) 0%, transparent 100%),
-      radial-gradient(1px 1px at 62% 42%, rgba(200,220,255,.3) 0%, transparent 100%);
+      radial-gradient(1px 1px at 10% 20%, rgba(184,108,0,.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 70%, rgba(184,108,0,.15) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 35%, rgba(184,108,0,.18) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 80%, rgba(184,108,0,.12) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 15%, rgba(184,108,0,.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 55%, rgba(184,108,0,.15) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 15% 90%, rgba(184,108,0,.18) 0%, transparent 100%),
+      radial-gradient(1px 1px at 92% 30%, rgba(184,108,0,.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 48% 10%, rgba(184,108,0,.12) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 78% 88%, rgba(184,108,0,.15) 0%, transparent 100%),
+      radial-gradient(1px 1px at 33% 50%, rgba(184,108,0,.16) 0%, transparent 100%),
+      radial-gradient(1px 1px at 62% 42%, rgba(184,108,0,.13) 0%, transparent 100%);
     pointer-events:none;
   }
   .hero-inner { position:relative; z-index:1; }
@@ -124,24 +110,16 @@
   }
   .hero-dot { width:6px; height:6px; border-radius:50%; background:var(--space-accent); animation:pulse 2s infinite; }
   @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.3;} }
-  .hero-title {
-    font-size:26px; font-weight:800; color:var(--space-text);
-    margin-bottom:6px; line-height:1.2;
-  }
+  .hero-title { font-size:26px; font-weight:800; color:var(--space-text); margin-bottom:6px; line-height:1.2; }
   .hero-title span { color:var(--space-accent); }
   .hero-desc { font-size:13px; color:var(--space-dim); margin-bottom:1.5rem; }
-
-  /* Ticker strip */
-  .ticker-strip {
-    display:flex; gap:20px; flex-wrap:wrap;
-  }
+  .ticker-strip { display:flex; gap:20px; flex-wrap:wrap; }
   .ticker-item {
     display:flex; flex-direction:column; gap:2px;
     background:rgba(255,255,255,.7);
     border:1px solid var(--space-border);
     border-radius:6px; padding:8px 14px; cursor:pointer;
-    transition:border-color .15s, background .15s;
-    min-width:90px;
+    transition:border-color .15s, background .15s; min-width:90px;
   }
   .ticker-item:hover { border-color:var(--space-accent); background:rgba(184,108,0,.06); }
   .ticker-item.active { border-color:var(--space-accent); background:rgba(184,108,0,.10); }
@@ -150,20 +128,11 @@
   .ticker-chg { font-family:var(--mono); font-size:11px; font-weight:700; }
   .ticker-chg.up { color:var(--space-green); }
   .ticker-chg.down { color:var(--space-red); }
-
-  /* ── CHART AREA ── */
   .chart-area { background:var(--space-bg2); padding:1.5rem 2.5rem 2rem; border-bottom:1px solid var(--space-border); }
-
-  .chart-controls {
-    display:flex; align-items:center; justify-content:space-between;
-    margin-bottom:1rem; flex-wrap:wrap; gap:8px;
-  }
+  .chart-controls { display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem; flex-wrap:wrap; gap:8px; }
   .chart-title-row { display:flex; align-items:center; gap:12px; }
-  .chart-sym-badge {
-    font-family:var(--mono); font-size:18px; font-weight:700; color:var(--space-text);
-  }
+  .chart-sym-badge { font-family:var(--mono); font-size:18px; font-weight:700; color:var(--space-text); }
   .chart-company { font-size:13px; color:var(--space-dim); }
-
   .timeframe-btns { display:flex; gap:4px; }
   .tf-btn {
     font-family:var(--mono); font-size:11px;
@@ -173,101 +142,56 @@
   }
   .tf-btn:hover { color:var(--space-text); border-color:var(--space-accent); background:#fff; }
   .tf-btn.active { background:var(--space-accent); color:#fff; border-color:var(--space-accent); }
-
-  /* TradingView chart container */
   .tv-wrap {
-    border:1px solid var(--space-border);
-    border-radius:8px; overflow:hidden;
-    background:#fff;
-    height:480px;
+    border:1px solid var(--space-border); border-radius:8px;
+    overflow:hidden; background:#fff; height:480px;
   }
-  .tv-wrap iframe,
-  .tv-wrap > div { width:100% !important; height:100% !important; }
-
-  /* ── BOTTOM GRID ── */
-  .bottom-section {
-    background:var(--bg); padding:2rem 2.5rem 3rem;
-    border-top:1px solid var(--border);
-  }
-  .section-heading {
-    display:flex; align-items:center; justify-content:space-between;
-    margin-bottom:1.2rem;
-  }
+  .tv-wrap iframe, .tv-wrap > div { width:100% !important; height:100% !important; }
+  .bottom-section { background:var(--bg); padding:2rem 2.5rem 3rem; border-top:1px solid var(--border); }
+  .section-heading { display:flex; align-items:center; justify-content:space-between; margin-bottom:1.2rem; }
   .section-heading-left { display:flex; align-items:center; gap:10px; }
   .sec-icon {
     width:26px; height:26px; border-radius:6px; background:var(--ink);
-    color:#fff; font-size:13px;
-    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-size:13px; display:flex; align-items:center; justify-content:center;
   }
   .sec-title { font-size:15px; font-weight:800; color:var(--ink); }
-
-  /* Mini chart grid */
-  .mini-grid {
-    display:grid;
-    grid-template-columns:repeat(4, 1fr);
-    gap:12px;
-    margin-bottom:2rem;
-  }
+  .mini-grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:12px; margin-bottom:2rem; }
   .mini-card {
     border:1px solid var(--border); border-radius:8px;
     overflow:hidden; cursor:pointer;
-    transition:border-color .15s, box-shadow .15s;
-    background:var(--bg);
+    transition:border-color .15s, box-shadow .15s; background:var(--bg);
   }
   .mini-card:hover { border-color:#bbb; box-shadow:0 2px 8px rgba(0,0,0,.07); }
   .mini-card.active-card { border-color:var(--accent); box-shadow:0 0 0 2px var(--accent-bg); }
-  .mini-card-header {
-    padding:10px 12px 6px;
-    display:flex; align-items:center; justify-content:space-between;
-  }
+  .mini-card-header { padding:10px 12px 6px; display:flex; align-items:center; justify-content:space-between; }
   .mini-sym { font-family:var(--mono); font-size:13px; font-weight:700; color:var(--ink); }
   .mini-chg { font-family:var(--mono); font-size:11px; font-weight:700; }
   .mini-chg.up { color:var(--green); }
   .mini-chg.down { color:var(--red); }
   .mini-company { font-size:10px; color:var(--ink3); padding:0 12px 8px; line-height:1.4; }
   .mini-chart-box { height:80px; background:var(--bg2); border-top:1px solid var(--border); }
-  .mini-chart-box iframe,
-  .mini-chart-box > div { width:100% !important; height:100% !important; }
-
-  /* Note tags */
-  .chip {
-    font-size:11px; padding:2px 8px; border-radius:4px;
-    border:1px solid transparent; font-weight:700; white-space:nowrap; display:inline-block;
-  }
+  .mini-chart-box iframe, .mini-chart-box > div { width:100% !important; height:100% !important; }
+  .chip { font-size:11px; padding:2px 8px; border-radius:4px; border:1px solid transparent; font-weight:700; white-space:nowrap; display:inline-block; }
   .chip-blue { background:var(--accent-bg); color:var(--accent); border-color:var(--accent-border); }
   .chip-default { background:var(--bg3); color:var(--ink3); border-color:var(--border); }
   .chip-amber { background:var(--amber-bg); color:var(--amber); border-color:var(--amber-border); }
-
-  /* Watchlist note table */
   .watch-table { width:100%; border-collapse:collapse; font-size:13px; }
-  .watch-table th {
-    font-size:11px; font-weight:700; color:var(--ink3); text-align:left;
-    padding:8px 12px; border-bottom:2px solid var(--border); background:var(--bg2);
-  }
+  .watch-table th { font-size:11px; font-weight:700; color:var(--ink3); text-align:left; padding:8px 12px; border-bottom:2px solid var(--border); background:var(--bg2); }
   .watch-table td { padding:11px 12px; border-bottom:1px solid var(--border); vertical-align:middle; }
   .watch-table tr:last-child td { border-bottom:none; }
   .watch-table tr:hover td { background:var(--bg2); cursor:pointer; }
   .sym-col { font-family:var(--mono); font-weight:700; color:var(--ink); }
   .name-col { color:var(--ink2); }
-  .theme-col { font-size:11px; color:var(--ink3); }
   .memo-col { font-size:12px; color:var(--ink3); max-width:240px; line-height:1.5; }
-
-  /* Callout */
-  .callout {
-    border-radius:8px; padding:13px 16px;
-    display:flex; gap:12px; margin-bottom:1.5rem;
-    font-size:13.5px; line-height:1.7;
-  }
+  .callout { border-radius:8px; padding:13px 16px; display:flex; gap:12px; margin-bottom:1.5rem; font-size:13.5px; line-height:1.7; }
   .callout-icon { font-size:17px; flex-shrink:0; }
   .callout-blue { background:var(--accent-bg); border:1px solid var(--accent-border); color:var(--ink2); }
-
   .divider { height:1px; background:var(--border); margin:2rem 0; }
 </style>
 </head>
 <body>
 <div class="app">
 
-  <!-- ── SIDEBAR ── -->
   <aside class="sidebar">
     <a href="stock-home.html" class="sidebar-header">
       <div class="workspace-icon">주</div>
@@ -294,7 +218,7 @@
       <div class="nav-section">
         <div class="nav-label">관심종목</div>
         <a href="stock-space-watchlist.html" class="nav-item"><span>🚀</span> 우주 테마 <span class="nav-item-count">1</span></a>
-        <a href="stock-semi-watchlist.html" class="nav-item"><span>💾</span> 반도체 테마 <span class="nav-item-count">1</span></a>
+        <a href="stock-semi-watchlist.html" class="nav-item active"><span>💾</span> 반도체 테마 <span class="nav-item-count">1</span></a>
       </div>
       <div class="sidebar-divider"></div>
       <div class="nav-section">
@@ -305,9 +229,7 @@
     </nav>
   </aside>
 
-  <!-- ── MAIN ── -->
   <div class="main">
-
     <div class="topbar">
       <div class="breadcrumb">
         <a href="stock-home.html" style="color:var(--ink3);">홈</a>
@@ -316,63 +238,56 @@
       </div>
     </div>
 
-    <!-- ── SPACE HERO ── -->
     <div class="space-hero">
       <div class="hero-inner">
-        <div class="hero-eyebrow">
-          <span class="hero-dot"></span>
-          WATCHLIST · SEMICONDUCTOR
-        </div>
+        <div class="hero-eyebrow"><span class="hero-dot"></span> WATCHLIST · SEMICONDUCTOR</div>
         <div class="hero-title">💾 <span>반도체 테마</span> 관심종목</div>
         <div class="hero-desc">AI · HBM · 파운드리 · 장비 · 팹리스 — 반도체 밸류체인 핵심 8종목</div>
-
-        <!-- 티커 스트립 -->
         <div class="ticker-strip" id="ticker-strip">
           <div class="ticker-item active" data-sym="005930" onclick="loadChart('005930')">
             <div class="ticker-sym">삼성전자</div>
             <div class="ticker-name">Samsung Elec</div>
-            <div class="ticker-chg up" id="chg-005930">메모리·파운드리</div>
+            <div class="ticker-chg up">메모리·파운드리</div>
           </div>
           <div class="ticker-item" data-sym="000660" onclick="loadChart('000660')">
             <div class="ticker-sym">SK하이닉스</div>
             <div class="ticker-name">SK Hynix</div>
-            <div class="ticker-chg up" id="chg-000660">HBM·DRAM</div>
+            <div class="ticker-chg up">HBM·DRAM</div>
           </div>
           <div class="ticker-item" data-sym="INTC" onclick="loadChart('INTC')">
             <div class="ticker-sym">INTC</div>
             <div class="ticker-name">Intel</div>
-            <div class="ticker-chg down" id="chg-INTC">CPU·파운드리</div>
+            <div class="ticker-chg down">CPU·파운드리</div>
           </div>
           <div class="ticker-item" data-sym="AMD" onclick="loadChart('AMD')">
             <div class="ticker-sym">AMD</div>
             <div class="ticker-name">AMD</div>
-            <div class="ticker-chg up" id="chg-AMD">CPU·GPU</div>
+            <div class="ticker-chg up">CPU·GPU</div>
           </div>
           <div class="ticker-item" data-sym="NVDA" onclick="loadChart('NVDA')">
             <div class="ticker-sym">NVDA</div>
             <div class="ticker-name">NVIDIA</div>
-            <div class="ticker-chg up" id="chg-NVDA">AI GPU</div>
+            <div class="ticker-chg up">AI GPU</div>
           </div>
           <div class="ticker-item" data-sym="ASML" onclick="loadChart('ASML')">
             <div class="ticker-sym">ASML</div>
             <div class="ticker-name">ASML</div>
-            <div class="ticker-chg up" id="chg-ASML">EUV 장비</div>
+            <div class="ticker-chg up">EUV 장비</div>
           </div>
           <div class="ticker-item" data-sym="TSM" onclick="loadChart('TSM')">
             <div class="ticker-sym">TSM</div>
             <div class="ticker-name">TSMC</div>
-            <div class="ticker-chg up" id="chg-TSM">파운드리</div>
+            <div class="ticker-chg up">파운드리</div>
           </div>
           <div class="ticker-item" data-sym="QCOM" onclick="loadChart('QCOM')">
             <div class="ticker-sym">QCOM</div>
             <div class="ticker-name">Qualcomm</div>
-            <div class="ticker-chg up" id="chg-QCOM">모바일AP</div>
+            <div class="ticker-chg up">모바일AP</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ── MAIN CHART ── -->
     <div class="chart-area">
       <div class="chart-controls">
         <div class="chart-title-row">
@@ -387,39 +302,29 @@
           <button class="tf-btn" onclick="setTF(this,'1Y')">1Y</button>
         </div>
       </div>
-
       <div class="tv-wrap" id="tv-main">
         <iframe id="tv-iframe"
           src="https://www.tradingview.com/chart/?symbol=KRX%3A005930&interval=W&theme=light&style=1&timezone=Asia%2FSeoul&locale=kr&toolbar_bg=f1f3f6&hide_side_toolbar=0"
           style="width:100%;height:100%;border:none;"
-          allowtransparency="true"
-          allowfullscreen>
+          allowtransparency="true" allowfullscreen>
         </iframe>
       </div>
     </div>
 
-    <!-- ── MINI CHART GRID + TABLE ── -->
     <div class="bottom-section">
-
       <div class="callout callout-blue">
         <span class="callout-icon">💡</span>
         <div>위 티커 또는 미니 카드를 클릭하면 메인 차트가 전환돼요. 종목 옆에 <strong>간단 메모</strong>를 추가하거나 노트 링크를 연결할 수 있어요.</div>
       </div>
-
       <div class="section-heading">
         <div class="section-heading-left">
           <div class="sec-icon">📊</div>
           <div class="sec-title">미니 차트</div>
         </div>
       </div>
-
       <div class="mini-grid">
-        <!-- 삼성전자 -->
         <div class="mini-card active-card" id="mini-005930" onclick="loadChart('005930')">
-          <div class="mini-card-header">
-            <span class="mini-sym">삼성전자</span>
-            <span class="mini-chg up">KRX</span>
-          </div>
+          <div class="mini-card-header"><span class="mini-sym">삼성전자</span><span class="mini-chg up">KRX</span></div>
           <div class="mini-company">Samsung Electronics</div>
           <div class="mini-chart-box">
             <div class="tradingview-widget-container" style="height:100%;width:100%">
@@ -430,13 +335,8 @@
             </div>
           </div>
         </div>
-
-        <!-- SK하이닉스 -->
         <div class="mini-card" id="mini-000660" onclick="loadChart('000660')">
-          <div class="mini-card-header">
-            <span class="mini-sym">SK하이닉스</span>
-            <span class="mini-chg up">KRX</span>
-          </div>
+          <div class="mini-card-header"><span class="mini-sym">SK하이닉스</span><span class="mini-chg up">KRX</span></div>
           <div class="mini-company">SK Hynix</div>
           <div class="mini-chart-box">
             <div class="tradingview-widget-container" style="height:100%;width:100%">
@@ -447,13 +347,8 @@
             </div>
           </div>
         </div>
-
-        <!-- INTC -->
         <div class="mini-card" id="mini-INTC" onclick="loadChart('INTC')">
-          <div class="mini-card-header">
-            <span class="mini-sym">INTC</span>
-            <span class="mini-chg down">NASDAQ</span>
-          </div>
+          <div class="mini-card-header"><span class="mini-sym">INTC</span><span class="mini-chg down">NASDAQ</span></div>
           <div class="mini-company">Intel</div>
           <div class="mini-chart-box">
             <div class="tradingview-widget-container" style="height:100%;width:100%">
@@ -464,13 +359,8 @@
             </div>
           </div>
         </div>
-
-        <!-- AMD -->
         <div class="mini-card" id="mini-AMD" onclick="loadChart('AMD')">
-          <div class="mini-card-header">
-            <span class="mini-sym">AMD</span>
-            <span class="mini-chg up">NASDAQ</span>
-          </div>
+          <div class="mini-card-header"><span class="mini-sym">AMD</span><span class="mini-chg up">NASDAQ</span></div>
           <div class="mini-company">AMD</div>
           <div class="mini-chart-box">
             <div class="tradingview-widget-container" style="height:100%;width:100%">
@@ -481,13 +371,8 @@
             </div>
           </div>
         </div>
-
-        <!-- NVDA -->
         <div class="mini-card" id="mini-NVDA" onclick="loadChart('NVDA')">
-          <div class="mini-card-header">
-            <span class="mini-sym">NVDA</span>
-            <span class="mini-chg up">NASDAQ</span>
-          </div>
+          <div class="mini-card-header"><span class="mini-sym">NVDA</span><span class="mini-chg up">NASDAQ</span></div>
           <div class="mini-company">NVIDIA</div>
           <div class="mini-chart-box">
             <div class="tradingview-widget-container" style="height:100%;width:100%">
@@ -498,13 +383,8 @@
             </div>
           </div>
         </div>
-
-        <!-- ASML -->
         <div class="mini-card" id="mini-ASML" onclick="loadChart('ASML')">
-          <div class="mini-card-header">
-            <span class="mini-sym">ASML</span>
-            <span class="mini-chg up">NASDAQ</span>
-          </div>
+          <div class="mini-card-header"><span class="mini-sym">ASML</span><span class="mini-chg up">NASDAQ</span></div>
           <div class="mini-company">ASML Holding</div>
           <div class="mini-chart-box">
             <div class="tradingview-widget-container" style="height:100%;width:100%">
@@ -515,13 +395,8 @@
             </div>
           </div>
         </div>
-
-        <!-- TSM -->
         <div class="mini-card" id="mini-TSM" onclick="loadChart('TSM')">
-          <div class="mini-card-header">
-            <span class="mini-sym">TSM</span>
-            <span class="mini-chg up">NYSE</span>
-          </div>
+          <div class="mini-card-header"><span class="mini-sym">TSM</span><span class="mini-chg up">NYSE</span></div>
           <div class="mini-company">TSMC</div>
           <div class="mini-chart-box">
             <div class="tradingview-widget-container" style="height:100%;width:100%">
@@ -532,13 +407,8 @@
             </div>
           </div>
         </div>
-
-        <!-- QCOM -->
         <div class="mini-card" id="mini-QCOM" onclick="loadChart('QCOM')">
-          <div class="mini-card-header">
-            <span class="mini-sym">QCOM</span>
-            <span class="mini-chg up">NASDAQ</span>
-          </div>
+          <div class="mini-card-header"><span class="mini-sym">QCOM</span><span class="mini-chg up">NASDAQ</span></div>
           <div class="mini-company">Qualcomm</div>
           <div class="mini-chart-box">
             <div class="tradingview-widget-container" style="height:100%;width:100%">
@@ -549,19 +419,16 @@
             </div>
           </div>
         </div>
-
-      </div><!-- /mini-grid -->
+      </div>
 
       <div class="divider"></div>
 
-      <!-- 종목 메모 테이블 -->
       <div class="section-heading">
         <div class="section-heading-left">
           <div class="sec-icon" style="background:var(--bg3);color:var(--ink3);font-size:14px;">📝</div>
           <div class="sec-title">종목 메모</div>
         </div>
       </div>
-
       <table class="watch-table">
         <thead>
           <tr>
@@ -574,64 +441,55 @@
         </thead>
         <tbody>
           <tr>
-            <td class="sym-col">005930</td>
-            <td class="name-col">삼성전자</td>
+            <td class="sym-col">005930</td><td class="name-col">삼성전자</td>
             <td><span class="chip chip-blue">메모리·파운드리</span></td>
             <td style="font-size:12px;color:var(--ink3);">KRX</td>
             <td class="memo-col">DRAM·NAND·파운드리 수직계열화. HBM3E 수율 개선이 2025 하반기 핵심 변수. 대주주 매집 여부와 외국인 수급 동시 모니터링.</td>
           </tr>
           <tr>
-            <td class="sym-col">000660</td>
-            <td class="name-col">SK하이닉스</td>
+            <td class="sym-col">000660</td><td class="name-col">SK하이닉스</td>
             <td><span class="chip chip-amber">HBM·DRAM</span></td>
             <td style="font-size:12px;color:var(--ink3);">KRX</td>
             <td class="memo-col">HBM3E 12단 엔비디아 독점 공급. AI 가속기 수요 직접 수혜. 2025년 HBM ASP 상승 사이클 진입 여부 확인 중.</td>
           </tr>
           <tr>
-            <td class="sym-col">INTC</td>
-            <td class="name-col">Intel</td>
+            <td class="sym-col">INTC</td><td class="name-col">Intel</td>
             <td><span class="chip chip-default">CPU·파운드리</span></td>
             <td style="font-size:12px;color:var(--ink3);">NASDAQ</td>
             <td class="memo-col">파운드리 전환 시도 중이나 수율 이슈 지속. 18A 공정 성공 여부가 주가 방향성 결정. 구조조정·비용 절감 진행 중.</td>
           </tr>
           <tr>
-            <td class="sym-col">AMD</td>
-            <td class="name-col">AMD</td>
+            <td class="sym-col">AMD</td><td class="name-col">AMD</td>
             <td><span class="chip chip-amber">CPU·GPU</span></td>
             <td style="font-size:12px;color:var(--ink3);">NASDAQ</td>
             <td class="memo-col">MI300X로 AI 가속기 시장 진입 성공. 엔비디아 대비 가격 경쟁력 보유. 데이터센터 GPU 점유율 확대 속도가 밸류에이션 결정.</td>
           </tr>
           <tr>
-            <td class="sym-col">NVDA</td>
-            <td class="name-col">NVIDIA</td>
+            <td class="sym-col">NVDA</td><td class="name-col">NVIDIA</td>
             <td><span class="chip chip-blue">AI GPU</span></td>
             <td style="font-size:12px;color:var(--ink3);">NASDAQ</td>
             <td class="memo-col">Blackwell GB200 NVL72 출하 본격화. 데이터센터 AI 인프라 투자 수혜 1순위. 현재 PER 부담이나 성장 모멘텀 유효.</td>
           </tr>
           <tr>
-            <td class="sym-col">ASML</td>
-            <td class="name-col">ASML Holding</td>
+            <td class="sym-col">ASML</td><td class="name-col">ASML Holding</td>
             <td><span class="chip chip-default">EUV 장비</span></td>
             <td style="font-size:12px;color:var(--ink3);">NASDAQ</td>
             <td class="memo-col">EUV 리소그래피 사실상 독점. 중국 수출 규제 영향으로 2024 가이던스 하향. 2025~2026 회복 사이클 기대 여부 점검.</td>
           </tr>
           <tr>
-            <td class="sym-col">TSM</td>
-            <td class="name-col">TSMC</td>
+            <td class="sym-col">TSM</td><td class="name-col">TSMC</td>
             <td><span class="chip chip-blue">파운드리</span></td>
             <td style="font-size:12px;color:var(--ink3);">NYSE</td>
             <td class="memo-col">2nm 공정 양산 준비 중. 엔비디아·애플·AMD 핵심 파운드리. 지정학 리스크(대만해협)가 상시 할인 요인으로 작용.</td>
           </tr>
           <tr>
-            <td class="sym-col">QCOM</td>
-            <td class="name-col">Qualcomm</td>
+            <td class="sym-col">QCOM</td><td class="name-col">Qualcomm</td>
             <td><span class="chip chip-default">모바일AP</span></td>
             <td style="font-size:12px;color:var(--ink3);">NASDAQ</td>
             <td class="memo-col">Snapdragon 8 Elite 온디바이스 AI 성능 선두. PC·자동차 반도체 다각화 진행. 스마트폰 교체 사이클 회복이 단기 트리거.</td>
           </tr>
         </tbody>
       </table>
-
     </div>
   </div>
 </div>
@@ -650,51 +508,44 @@
 
   let currentSym = '005930';
   let currentInterval = 'W';
-
   const intervalMap = { '1D':'D', '1W':'W', '1M':'M', '3M':'3M', '1Y':'12M' };
 
-function buildIframeSrc(sym, interval) {
-  const { exchange } = symbolMap[sym];
-  const encoded = encodeURIComponent(exchange + ':' + sym);
+  function buildIframeSrc(sym, interval) {
+    const { exchange } = symbolMap[sym];
+    const encoded = encodeURIComponent(exchange + ':' + sym);
 
-  if (exchange === 'KRX') {
-    return `https://www.tradingview.com/chart/?symbol=${encoded}`
+    // 한국 주식(KRX)만 chart/ URL 사용
+    if (exchange === 'KRX') {
+      return `https://www.tradingview.com/chart/?symbol=${encoded}`
+        + `&interval=${interval}`
+        + `&theme=light&style=1`
+        + `&timezone=Asia%2FSeoul&locale=kr`
+        + `&toolbar_bg=f1f3f6&hide_side_toolbar=0`;
+    }
+
+    // 해외 주식은 widgetembed 사용
+    return `https://www.tradingview.com/widgetembed/?frameElementId=tv-iframe`
+      + `&symbol=${encoded}`
       + `&interval=${interval}`
-      + `&theme=light&style=1`
-      + `&timezone=Asia%2FSeoul&locale=kr`
-      + `&toolbar_bg=f1f3f6&hide_side_toolbar=0`;
+      + `&hidesidetoolbar=0&symboledit=0&saveimage=1`
+      + `&toolbarbg=f1f3f6&theme=light&style=1`
+      + `&timezone=Asia%2FSeoul&withdateranges=1&locale=kr`;
   }
-
-  return `https://www.tradingview.com/widgetembed/?frameElementId=tv-iframe`
-    + `&symbol=${encoded}`
-    + `&interval=${interval}`
-    + `&hidesidetoolbar=0&symboledit=0&saveimage=1`
-    + `&toolbarbg=f1f3f6&theme=light&style=1`
-    + `&timezone=Asia%2FSeoul&withdateranges=1&locale=kr`;
-}
 
   function updateChart() {
     document.getElementById('tv-iframe').src = buildIframeSrc(currentSym, currentInterval);
   }
 
-  function loadChart(sym, _company, _exchange, clickedEl) {
+  function loadChart(sym) {
     currentSym = sym;
-
-    // 티커 스트립 active
     document.querySelectorAll('.ticker-item').forEach(el => el.classList.remove('active'));
-    // clickedEl이 ticker-item이면 그것만, 아니면 data 매칭
     const ticker = document.querySelector(`.ticker-item[data-sym="${sym}"]`);
     if (ticker) ticker.classList.add('active');
-
-    // 미니 카드 active
     document.querySelectorAll('.mini-card').forEach(el => el.classList.remove('active-card'));
     const mc = document.getElementById('mini-' + sym);
     if (mc) mc.classList.add('active-card');
-
-    // 헤더 업데이트
-    document.getElementById('chart-sym').textContent = sym;
+    document.getElementById('chart-sym').textContent = sym === '005930' ? '삼성전자' : sym === '000660' ? 'SK하이닉스' : sym;
     document.getElementById('chart-company').textContent = symbolMap[sym].name;
-
     updateChart();
   }
 
