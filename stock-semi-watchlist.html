@@ -390,7 +390,7 @@
 
       <div class="tv-wrap" id="tv-main">
         <iframe id="tv-iframe"
-          src="https://www.tradingview.com/widgetembed/?frameElementId=tv-iframe&symbol=KRX%3005930&interval=W&hidesidetoolbar=0&symboledit=0&saveimage=1&toolbarbg=f1f3f6&theme=light&style=1&timezone=Asia%2FSeoul&withdateranges=1&locale=kr"
+          src="https://www.tradingview.com/widgetembed/?frameElementId=tv-iframe&symbol=KRX%3A005930&interval=W&hidesidetoolbar=0&symboledit=0&saveimage=1&toolbarbg=f1f3f6&theme=light&style=1&timezone=Asia%2FSeoul&withdateranges=1&locale=kr"
           style="width:100%;height:100%;border:none;"
           allowtransparency="true"
           allowfullscreen>
@@ -653,16 +653,25 @@
 
   const intervalMap = { '1D':'D', '1W':'W', '1M':'M', '3M':'3M', '1Y':'12M' };
 
-  function buildIframeSrc(sym, interval) {
-    const { exchange } = symbolMap[sym];
-    const encoded = encodeURIComponent(exchange + ':' + sym);
-    return `https://www.tradingview.com/widgetembed/?frameElementId=tv-iframe`
-      + `&symbol=${encoded}`
+function buildIframeSrc(sym, interval) {
+  const { exchange } = symbolMap[sym];
+  const encoded = encodeURIComponent(exchange + ':' + sym);
+
+  if (exchange === 'KRX') {
+    return `https://www.tradingview.com/chart/?symbol=${encoded}`
       + `&interval=${interval}`
-      + `&hidesidetoolbar=0&symboledit=0&saveimage=1`
-      + `&toolbarbg=f1f3f6&theme=light&style=1`
-      + `&timezone=Asia%2FSeoul&withdateranges=1&locale=kr`;
+      + `&theme=light&style=1`
+      + `&timezone=Asia%2FSeoul&locale=kr`
+      + `&toolbar_bg=f1f3f6&hide_side_toolbar=0`;
   }
+
+  return `https://www.tradingview.com/widgetembed/?frameElementId=tv-iframe`
+    + `&symbol=${encoded}`
+    + `&interval=${interval}`
+    + `&hidesidetoolbar=0&symboledit=0&saveimage=1`
+    + `&toolbarbg=f1f3f6&theme=light&style=1`
+    + `&timezone=Asia%2FSeoul&withdateranges=1&locale=kr`;
+}
 
   function updateChart() {
     document.getElementById('tv-iframe').src = buildIframeSrc(currentSym, currentInterval);
