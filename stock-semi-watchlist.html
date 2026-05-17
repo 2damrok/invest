@@ -303,11 +303,9 @@
         </div>
       </div>
       <div class="tv-wrap" id="tv-main">
-        <iframe id="tv-iframe"
-          src="https://www.tradingview.com/chart/?symbol=KRX%3A005930&interval=W&theme=light&style=1&timezone=Asia%2FSeoul&locale=kr&toolbar_bg=f1f3f6&hide_side_toolbar=0"
-          style="width:100%;height:100%;border:none;"
-          allowtransparency="true" allowfullscreen>
-        </iframe>
+        <div class="tradingview-widget-container" style="height:100%;width:100%">
+          <div id="tv-chart-widget" style="height:100%;width:100%"></div>
+        </div>
       </div>
     </div>
 
@@ -494,67 +492,73 @@
   </div>
 </div>
 
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
 <script>
   const symbolMap = {
-    '005930': { exchange:'KRX',    name:'삼성전자 · KRX' },
-    '000660': { exchange:'KRX',    name:'SK하이닉스 · KRX' },
-    'INTC':   { exchange:'NASDAQ', name:'Intel · NASDAQ' },
-    'AMD':    { exchange:'NASDAQ', name:'AMD · NASDAQ' },
-    'NVDA':   { exchange:'NASDAQ', name:'NVIDIA · NASDAQ' },
-    'ASML':   { exchange:'NASDAQ', name:'ASML Holding · NASDAQ' },
-    'TSM':    { exchange:'NYSE',   name:'TSMC · NYSE' },
-    'QCOM':   { exchange:'NASDAQ', name:'Qualcomm · NASDAQ' },
+    '005930': { exchange:'KRX',    name:'삼성전자 · KRX',       label:'삼성전자' },
+    '000660': { exchange:'KRX',    name:'SK하이닉스 · KRX',     label:'SK하이닉스' },
+    'INTC':   { exchange:'NASDAQ', name:'Intel · NASDAQ',        label:'INTC' },
+    'AMD':    { exchange:'NASDAQ', name:'AMD · NASDAQ',           label:'AMD' },
+    'NVDA':   { exchange:'NASDAQ', name:'NVIDIA · NASDAQ',        label:'NVDA' },
+    'ASML':   { exchange:'NASDAQ', name:'ASML Holding · NASDAQ',  label:'ASML' },
+    'TSM':    { exchange:'NYSE',   name:'TSMC · NYSE',            label:'TSM' },
+    'QCOM':   { exchange:'NASDAQ', name:'Qualcomm · NASDAQ',      label:'QCOM' },
   };
 
   let currentSym = '005930';
   let currentInterval = 'W';
+  let tvWidget = null;
   const intervalMap = { '1D':'D', '1W':'W', '1M':'M', '3M':'3M', '1Y':'12M' };
 
-  function buildIframeSrc(sym, interval) {
+  function createWidget(sym, interval) {
     const { exchange } = symbolMap[sym];
-    const encoded = encodeURIComponent(exchange + ':' + sym);
+    const container = document.getElementById('tv-chart-widget');
+    container.innerHTML = '';
 
-    // 한국 주식(KRX)만 chart/ URL 사용
-    if (exchange === 'KRX') {
-      return `https://www.tradingview.com/chart/?symbol=${encoded}`
-        + `&interval=${interval}`
-        + `&theme=light&style=1`
-        + `&timezone=Asia%2FSeoul&locale=kr`
-        + `&toolbar_bg=f1f3f6&hide_side_toolbar=0`;
-    }
-
-    // 해외 주식은 widgetembed 사용
-    return `https://www.tradingview.com/widgetembed/?frameElementId=tv-iframe`
-      + `&symbol=${encoded}`
-      + `&interval=${interval}`
-      + `&hidesidetoolbar=0&symboledit=0&saveimage=1`
-      + `&toolbarbg=f1f3f6&theme=light&style=1`
-      + `&timezone=Asia%2FSeoul&withdateranges=1&locale=kr`;
-  }
-
-  function updateChart() {
-    document.getElementById('tv-iframe').src = buildIframeSrc(currentSym, currentInterval);
+    tvWidget = new TradingView.widget({
+      container_id: 'tv-chart-widget',
+      symbol: exchange + ':' + sym,
+      interval: interval,
+      timezone: 'Asia/Seoul',
+      theme: 'light',
+      style: '1',
+      locale: 'kr',
+      toolbar_bg: '#f1f3f6',
+      hide_side_toolbar: false,
+      allow_symbol_change: false,
+      save_image: true,
+      autosize: true,
+    });
   }
 
   function loadChart(sym) {
     currentSym = sym;
+
     document.querySelectorAll('.ticker-item').forEach(el => el.classList.remove('active'));
-    const ticker = document.querySelector(`.ticker-item[data-sym="${sym}"]`);
+    const ticker = document.querySelector('.ticker-item[data-sym="' + sym + '"]');
     if (ticker) ticker.classList.add('active');
+
     document.querySelectorAll('.mini-card').forEach(el => el.classList.remove('active-card'));
     const mc = document.getElementById('mini-' + sym);
     if (mc) mc.classList.add('active-card');
-    document.getElementById('chart-sym').textContent = sym === '005930' ? '삼성전자' : sym === '000660' ? 'SK하이닉스' : sym;
+
+    document.getElementById('chart-sym').textContent = symbolMap[sym].label;
     document.getElementById('chart-company').textContent = symbolMap[sym].name;
-    updateChart();
+
+    createWidget(sym, currentInterval);
   }
 
   function setTF(btn, tf) {
     document.querySelectorAll('.tf-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     currentInterval = intervalMap[tf] || 'W';
-    updateChart();
+    createWidget(currentSym, currentInterval);
   }
+
+  // 초기 로드
+  window.addEventListener('load', function() {
+    createWidget('005930', 'W');
+  });
 </script>
 </body>
 </html>
